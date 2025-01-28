@@ -31,7 +31,7 @@ def get_reading(s: str) -> str:
     )
 
 
-def group_variation(s: str) -> Dict[str, List[str]]:
+def group_variants(s: str) -> Dict[str, List[str]]:
     d: Dict[str, List[str]] = {}
     morphs = SUDACHI_TOKENIZER.tokenize(s, TOKENIZE_MODE)
     for morph in morphs:
@@ -44,7 +44,7 @@ def group_variation(s: str) -> Dict[str, List[str]]:
     return d
 
 
-def format_variation(d: Dict[str, List[str]]) -> str:
+def format_variants(d: Dict[str, List[str]]) -> str:
     ss = []
     for k, v in d.items():
         vs = list(set(v))
@@ -77,7 +77,7 @@ def read_file(path: str) -> str:
 def main(path: str):
     t = read_file(path)
     if 0 < len(t):
-        s = format_variation(group_variation(t))
+        s = format_variants(group_variants(t))
         Path("out/out.txt").write_text(s, encoding="utf-8")
 
 
